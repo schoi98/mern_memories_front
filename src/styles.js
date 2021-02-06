@@ -17,7 +17,7 @@ export default makeStyles((theme) => ({
       },
       [theme.breakpoints.down('sm')]: {
         mainContainer: {
-          flexdirection: "column-reverse"
+          flexDirection: "column-reverse"
         }
       }
 }));
