@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5000' });
+const API = axios.create({ baseURL: 'https://mern-tutorial-memories.herokuapp.com/' });
+// change from local to url from heroku originally: http://localhost:5000/ for testing
 
 API.interceptors.request.use((req) => {
     // for the backend to verify token communicates with middleware
@@ -11,7 +12,7 @@ API.interceptors.request.use((req) => {
     return req;
 }); // function to happen on each request
 
-// const url = 'https://mern-tutorial-memories.herokuapp.com/posts'; // change from local to url from heroku originally: http://localhost:5000/posts
+
 
 
 export const fetchPosts = () => API.get('/posts');
