@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
+import decode from 'jwt-decode';
 
 import memories from '../../images/memories.png';
 
@@ -16,14 +17,19 @@ const NavBar = () => {
 
     const logOut = () => {
         dispatch({type: 'LOGOUT' });
-        history.push('/');
+        history.push('/auth');
         setUser(null);
     }
 
     useEffect(() => {
-        // const token = user?.token;
-        //JWT
+        const token = user?.token;
+
+        if (token) {
+            const decodedToken = decode(token);
+            if (decodedToken.exp * 1000 < new Date().getTime()) logOut();
+        }
         setUser(JSON.parse(localStorage.getItem('profile')));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location])
 
     return (
